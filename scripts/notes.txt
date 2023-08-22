@@ -1,0 +1,16 @@
+WindowFunction:
+	Blackman seems to work best
+	Inadequate: Gaussian, Tukey, Kaiser (all with WindowParameter set to 0.5)
+
+3DPDF above temp of ordering with no subtraction:
+	Results in very similar patterns as found below temp of ordering
+	Appears to have both the atomic scattering pattern matching the unit cell
+	and the short-range magnetic scattering pattern present
+
+3DPDF 370K Inelastic
+	Does not seem to have any major feature differences when compared to
+	elastic scattering, only small things that may be noise.
+	The dimmer spots appear brighter for elastic scattering
+
+Punch and fill
+	increasing "Size" seems to decrease the extent of the resulting pdf pattern

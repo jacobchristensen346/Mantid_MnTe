@@ -1,0 +1,8 @@
+Procedure for each mesh scan:
+1. MnTe_mesh.py: update scan numbers and output names (lines 23 and 33)
+2. MnTe_norm.py: run with LoadCC=0. Update run numbers and names.
+3. MnTe_norm.py: run with LoadCC=1. Update run numbers and names.
+4. Update the processed.txt file.
+
+Other things to try out at some point:
+-messing with the HKL ranges and binning

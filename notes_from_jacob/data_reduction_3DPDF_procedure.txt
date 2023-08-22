@@ -1,0 +1,45 @@
+Procedure for processing MnTe scattering data and calculating the PDF
+
+Create new UB matrix (if needed) using MnTe_mesh.py:
+--Open up MnTe_mesh.py
+--Change the variable "start" to the first run number of the desired range of runs to be
+	processed. This should correspond to the beginning of the chosen temperature.
+--Update "newUBFile" according to the correct temperature (do not change "UBfile"). 
+--Run the script, and a new UB matrix will be created.
+
+Process the scattering data using MnTe_norm.py:
+--Open up MnTe_norm.py
+--Ensure the directory variables at the start point to the right path.
+--Update variable "start" to the first run number for the given temp.
+--Update variable "LoadCC" to either True or False.
+--Update the variable "temp" according to temperature, and append 'Total' if LoadCC = False, or
+	'CC' if LoadCC = True.
+--Update variable "UBfile" according to temperature
+--Execute the script to process the runs. This will generate a new mantid workspace, 
+	which will be saved into a folder according to its temperature.
+
+Generate a subtraction workspace:
+--Open up subtractionScript.py. 
+--Ensure that "startDir" gives the correct path.
+--Update the variable 'fName' with the appropriate temperatures. 
+--Load in the workspaces which you would like to subtract from one another, and update 
+	"ws1" and "ws2" according to these names (the script will subtract ws1 from ws2).
+--Run the script, and a subtraction workspace will be saved.
+
+Calculate PDF with calculate_fft.py:
+--Open up calculate_fft.py
+--Ensure that "start_dir" gives the right path. 
+--Update variables "name_fft" and "name_int" according to temperature (the desired file names that the
+	intermediate and fft workspaces will be saved under).
+--Update variable "ws" to the name of the workspace to be processed. 
+--Update "slice_ws" to True if you want to reduce the size of the workspace. If true, the SliceMDHisto 
+	algorithm will run; make sure to update this to slice through the desired number of bins 
+	(Take care that the slice will still be centered on the origin, else DeltaPDF3D will not work).
+	Recommended slice: Start='80,75,80',End='921,859,921'
+--Update parameters in DeltaPDF3D if desired. Recommended options (so far):
+	DeltaPDF3D(InputWorkspace=ws,
+		IntermediateWorkspace='intermediate',
+		OutputWorkspace='fft',
+		Method='KAREN',
+		KARENWidth=7)
+--Run the script. Two new workspaces (fft and intermediate) will be saved.
